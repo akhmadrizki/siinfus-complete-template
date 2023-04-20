@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg">
     <div class="container">
         <a class="navbar-brand me-lg-5 me-0" href="index.html">
-            <h3>SiInfus</h3>
+            <img src="{{ asset('logo/logo.png') }}" class="logo-image img-fluid" alt="logo">
         </a>
 
         <div class="collapse navbar-collapse" id="navbarNav">
