@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('pages.admin.index');
 })->name('index');
+
+Route::get('/login', function () {
+    return view('layouts.auth.index');
+})->name('login');
