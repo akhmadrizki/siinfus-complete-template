@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,10 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('pages.admin.index');
-})->name('index');
+Route::get('/login', [LoginController::class, 'showLoginForm']);
+Route::post('/login', [LoginController::class, 'login'])->name('login');
 
-Route::get('/login', function () {
-    return view('layouts.auth.index');
-})->name('login');
+
+Route::middleware('auth')->group(function () {
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+    Route::get('/', [DashboardController::class, 'index'])->name('index');
+});

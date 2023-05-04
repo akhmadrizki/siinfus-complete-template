@@ -46,17 +46,18 @@
                   <p class="mb-0">Enter your email and password to sign in</p>
                 </div>
                 <div class="card-body">
-                  <form role="form">
-                    <label>Username</label>
+                  <form method="POST" action="{{ route('admin.login') }}" role="form">
+                    @csrf
+                    <label>Email</label>
                     <div class="mb-3">
-                      <input type="text" class="form-control" placeholder="Username" autofocus>
+                      <input type="email" class="form-control" name="email" placeholder="Email" autofocus required>
                     </div>
                     <label>Password</label>
                     <div class="mb-3">
-                      <input type="password" class="form-control" placeholder="Password">
+                      <input type="password" class="form-control" name="password" placeholder="Password">
                     </div>
                     <div class="text-center">
-                      <button type="button" class="btn bg-gradient-info w-100 mt-4 mb-0">Sign in</button>
+                      <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0">Sign in</button>
                     </div>
                   </form>
                 </div>
