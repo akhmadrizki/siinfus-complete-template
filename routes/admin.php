@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,5 +22,11 @@ Route::post('/login', [LoginController::class, 'login'])->name('login');
 
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
     Route::get('/', [DashboardController::class, 'index'])->name('index');
+
+    Route::get('/news', [NewsController::class, 'index'])->name('news.index');
+    Route::get('/news/create', [NewsController::class, 'create'])->name('news.create');
+    Route::post('/news/create', [NewsController::class, 'store'])->name('news.store');
+    Route::get('/news/edit', [NewsController::class, 'edit'])->name('news.edit');
 });

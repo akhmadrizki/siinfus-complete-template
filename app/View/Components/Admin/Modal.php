@@ -6,31 +6,21 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Layout extends Component
+class Modal extends Component
 {
     /**
-     * The component title.
+     * Modal ID
      *
      * @var string
      */
-    public $title;
-
-    /**
-     * The component header.
-     *
-     * @var string
-     */
-    public $header;
+    public $id;
 
     /**
      * Create a new component instance.
-     *
-     * @param string $title
      */
-    public function __construct($title = '', $header = '')
+    public function __construct($id = '')
     {
-        $this->title  = $title;
-        $this->header = $header;
+        $this->id = $id;
     }
 
     /**
@@ -38,6 +28,6 @@ class Layout extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('layouts.admin.index');
+        return view('components.admin.modal');
     }
 }
