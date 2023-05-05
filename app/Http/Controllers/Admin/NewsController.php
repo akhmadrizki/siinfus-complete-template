@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\News;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class NewsController extends Controller
 {
@@ -26,14 +27,22 @@ class NewsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|min:5|max:255',
+            'title'   => 'required|min:5|max:255',
             'content' => 'required|min:5',
+            'image'   => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
+
+        if ($request->hasFile('image')) {
+            // get image file and hash it
+            $image = $request->file('image')->hashName();
+            $request->file('image')->storeAs('images/news', $image, 'public');
+        }
 
         News::create([
             'user_id'     => auth()->user()->id,
             'title'       => $request->title,
             'content'     => $request->content,
+            'image'       => $image ?? null,
             'category_id' => $request->category_id,
         ]);
 

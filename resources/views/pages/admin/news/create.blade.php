@@ -3,8 +3,18 @@
 <div class="row">
     <div class="col-12">
       <div class="card p-3">
-        <form action="{{ route('admin.news.store') }}" method="POST" class="row g-3">
+        <form action="{{ route('admin.news.store') }}" method="POST" class="row g-3" enctype="multipart/form-data">
             @csrf
+            <div class="col-md-12">
+                <label for="formFile" class="form-label">Imgae</label>
+                <input class="form-control @error('image') is-invalid @enderror" type="file" name="image" id="formFile">
+
+                @error('image')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
             <div class="col-md-12">
               <label for="title" class="form-label">Title</label>
               <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" id="title" value="{{ old('title') }}">

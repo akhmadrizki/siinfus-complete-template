@@ -6,6 +6,9 @@
         <form method="POST" action="{{ route('admin.news.update', $news->id) }}" class="row g-3">
             @csrf
             @method('PUT')
+
+            <img src="{{ asset('storage/images/news/' . $news->image) }}">
+
             <div class="col-md-12">
               <label for="title" class="form-label">Title</label>
               <input type="text" name="title" value="{{ $news->title }}" class="form-control" id="title">
