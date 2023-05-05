@@ -25,7 +25,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  " href="../pages/billing.html">
+          <a class="nav-link {{ Request::route()->getName() == 'admin.category.index' ? 'active' : null }}" href="{{ route('admin.category.index') }}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="fas fa-hashtag mb-1 text-dark" style="font-size: 10pt"></i>
             </div>

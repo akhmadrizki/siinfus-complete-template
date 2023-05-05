@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\News;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -17,7 +18,9 @@ class NewsController extends Controller
 
     public function create()
     {
-        return view('pages.admin.news.create');
+        $categories = Category::all();
+
+        return view('pages.admin.news.create', compact('categories'));
     }
 
     public function store(Request $request)
@@ -28,10 +31,10 @@ class NewsController extends Controller
         ]);
 
         News::create([
-            'user_id' => auth()->user()->id,
-            'title'   => $request->title,
-            'content' => $request->content,
-            'category_id' => 1,
+            'user_id'     => auth()->user()->id,
+            'title'       => $request->title,
+            'content'     => $request->content,
+            'category_id' => $request->category_id,
         ]);
 
         return redirect()->route('admin.news.index')->with([
@@ -40,9 +43,25 @@ class NewsController extends Controller
         ]);
     }
 
-    public function edit()
+    public function edit(News $news)
     {
-        return view('pages.admin.news.edit');
+        $categories = Category::all();
+
+        return view('pages.admin.news.edit', compact('news', 'categories'));
+    }
+
+    public function update(Request $request, News $news)
+    {
+        $news->update([
+            'title'       => $request->title,
+            'content'     => $request->content,
+            'category_id' => $request->category_id,
+        ]);
+
+        return redirect()->route('admin.news.index')->with([
+            'message' => 'Berita berhasil diperbarui',
+            'type'    => 'success',
+        ]);
     }
 
     public function destroy(News $news)

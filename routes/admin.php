@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Auth\LoginController;
@@ -28,6 +29,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/news', [NewsController::class, 'index'])->name('news.index');
     Route::get('/news/create', [NewsController::class, 'create'])->name('news.create');
     Route::post('/news/create', [NewsController::class, 'store'])->name('news.store');
-    Route::get('/news/edit', [NewsController::class, 'edit'])->name('news.edit');
+    Route::get('/news/{news}/edit', [NewsController::class, 'edit'])->name('news.edit');
+    Route::put('/news/{news}/edit', [NewsController::class, 'update'])->name('news.update');
     Route::delete('/news/{news}/delete', [NewsController::class, 'destroy'])->name('news.destroy');
+
+    Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
 });

@@ -14,9 +14,11 @@
             </div>
             <div class="col-md-4">
               <label for="inputState" class="form-label">Category</label>
-              <select id="inputState" class="form-select">
-                <option selected>Choose...</option>
-                <option>...</option>
+              <select name="category_id" id="inputState" class="form-select">
+                <option value="none" selected disabled>Choose...</option>
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                @endforeach
               </select>
             </div>
             <div class="col-12">
