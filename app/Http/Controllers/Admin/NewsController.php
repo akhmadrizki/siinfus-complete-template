@@ -11,7 +11,7 @@ class NewsController extends Controller
 {
     public function index()
     {
-        $news = News::orderBy('created_at', 'asc')->paginate(10);
+        $news = News::orderBy('created_at', 'desc')->paginate(10);
         return view('pages.admin.news.index', compact('news'));
     }
 
@@ -43,5 +43,15 @@ class NewsController extends Controller
     public function edit()
     {
         return view('pages.admin.news.edit');
+    }
+
+    public function destroy(News $news)
+    {
+        $news->delete();
+
+        return redirect()->route('admin.news.index')->with([
+            'message' => 'Berita berhasil dihapus',
+            'type'    => 'success',
+        ]);
     }
 }

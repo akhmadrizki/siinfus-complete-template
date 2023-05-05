@@ -58,7 +58,7 @@
                         </a>
                         |
 
-                        <a href="#" class="text-danger font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#modal-default">
+                        <a href="#" class="text-danger font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#delete-{{ $information->id }}">
                             Delete
                         </a>
                     </td>
@@ -81,30 +81,33 @@
     </div>
   </div>
 
-    <x-admin::modal id="modal-default">
-        <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h6 class="modal-title" id="modal-title-default">Are you sure want to delete this?</h6>
-                <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>
-                    Delete this user will remove all data related to this user.
-                </p>
-            </div>
-            <div class="modal-footer">
-                <form action="#" method="POST">
-                    <button type="button" class="btn bg-gradient-primary">Delete</button>
-                    {{-- @method('DELETE') --}}
-                    @csrf
-                </form>
-                <button type="submit" class="btn btn-link  ml-auto" data-bs-dismiss="modal">Close</button>
-            </div>
-            </div>
-        </div>
+
+    @foreach ($news as $item)
+    <x-admin::modal id="delete-{{ $item->id }}">
+      <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+          <div class="modal-content">
+          <div class="modal-header">
+              <h6 class="modal-title" id="modal-title-default">Are you sure want to delete this {{ $item->title }}?</h6>
+              <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <p>
+                  Delete this news will permanently remove the data from our database.
+              </p>
+          </div>
+          <div class="modal-footer">
+              <form action="{{ route('admin.news.destroy', $item->id) }}" method="POST">
+                  @method('DELETE')
+                  @csrf
+                  <button type="submit" class="btn bg-gradient-primary">Delete</button>
+              </form>
+              <button type="button" class="btn btn-link  ml-auto" data-bs-dismiss="modal">Close</button>
+          </div>
+          </div>
+      </div>
     </x-admin::modal>
+    @endforeach
 
 </x-admin>
