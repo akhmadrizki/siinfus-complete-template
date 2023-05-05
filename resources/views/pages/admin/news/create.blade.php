@@ -7,7 +7,13 @@
             @csrf
             <div class="col-md-12">
               <label for="title" class="form-label">Title</label>
-              <input type="text" class="form-control" name="title" id="title">
+              <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" id="title" value="{{ old('title') }}">
+
+                @error('title')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
             <div class="col-md-12">
                 <textarea class="form-control" name="content" placeholder="Leave a comment here" style="height: 100px"></textarea>

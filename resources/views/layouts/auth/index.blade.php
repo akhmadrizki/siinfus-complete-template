@@ -50,11 +50,23 @@
                     @csrf
                     <label>Email</label>
                     <div class="mb-3">
-                      <input type="email" class="form-control" name="email" placeholder="Email" autofocus required>
+                      <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="Email" autofocus required>
+
+                        @error('email')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <label>Password</label>
                     <div class="mb-3">
-                      <input type="password" class="form-control" name="password" placeholder="Password">
+                      <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Password">
+
+                        @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="text-center">
                       <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0">Sign in</button>
